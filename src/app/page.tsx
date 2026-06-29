@@ -3,13 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "../components/navbar"; 
 
-const roomNum: Record<string, string> = {
-  "kamar-1": "01",
-  "kamar-2": "02",
-  "kamar-3": "03",
-  "kamar-4": "04",
-};
-
 const stripItems = [
   "AC & Kipas Angin",
   "WiFi 100 Mbps",
@@ -46,51 +39,46 @@ const mapDetails = [
   {
     icon: "📞",
     label: "Hubungi Kami",
-    val: "WA: 0812-xxxx-xxxx",
+    val: "WA: 0812-2134-32892",
     highlight: true,
   },
 ];
 
 const facilities = [
   {
-    icon: "🛏️",
-    title: "Kasur Premium",
-    desc: "Kasur empuk berkualitas hotel agar tidur lebih nyaman.",
-  },
-  {
-    icon: "❄️",
-    title: "AC Dingin",
-    desc: "Setiap kamar dilengkapi AC yang terawat.",
-  },
-  {
-    icon: "🚿",
-    title: "Kamar Mandi Dalam",
-    desc: "Privasi lebih nyaman dengan kamar mandi pribadi.",
-  },
-  {
-    icon: "📶",
+    no: "01",
     title: "WiFi Cepat",
-    desc: "Internet hingga 100 Mbps untuk kerja maupun hiburan.",
+    desc: "Internet stabil hingga 100 Mbps untuk bekerja, kuliah, maupun hiburan.",
+    icon: "📶",
+    image: "/wifi.jpg",
   },
   {
-    icon: "🛵",
+    no: "02",
+    title: "AC & Ventilasi",
+    desc: "Ruangan tetap sejuk dengan AC dan sirkulasi udara yang baik.",
+    icon: "❄️",
+    image: "/ac.jpg",
+  },
+  {
+    no: "03",
+    title: "Kamar Mandi Dalam",
+    desc: "Privasi lebih terjaga dengan kamar mandi pribadi yang bersih.",
+    icon: "🚿",
+    image: "/kamarmandi.jpg",
+  },
+  {
+    no: "04",
     title: "Parkir Aman",
-    desc: "Area parkir motor yang luas dan CCTV 24 jam.",
+    desc: "Area parkir luas dengan pengawasan CCTV selama 24 jam.",
+    icon: "🛵",
+    image: "/parking.jpg",
   },
   {
-    icon: "🍳",
-    title: "Dapur Bersama",
-    desc: "Tersedia dapur lengkap yang bisa digunakan penghuni.",
-  },
-  {
-    icon: "🧹",
-    title: "Cleaning Service",
-    desc: "Area bersama dibersihkan secara rutin setiap hari.",
-  },
-  {
+    no: "05",
+    title: "Akses 24 Jam",
+    desc: "Keluar masuk lebih fleksibel kapan saja tanpa batasan jam.",
     icon: "🔐",
-    title: "Keamanan 24 Jam",
-    desc: "Lingkungan aman dengan akses bebas selama 24 jam.",
+    image: "/access.jpg",
   },
 ];
 
@@ -191,42 +179,86 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ── Facilities ── */}
-      <section className="bg-[#F8F3EC] px-14 py-24">
-        <div className="mb-14 text-center">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[3px] text-[#C96A00]">
-            Fasilitas
-          </p>
+      {/* ───────────────── Facilities ───────────────── */}
+      <section
+        id="fasilitas"
+        className="bg-[#FDFBF7] px-14 py-28 overflow-hidden"
+      >
+        <div className="relative mb-20">
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[3px] text-[#C96A00]">
+                Fasilitas Unggulan
+              </p>
 
-          <h2 className="font-display text-[46px] font-black text-[#1C1008]">
-            Semua yang kamu butuhkan
-            <br />
-            dalam satu tempat
-          </h2>
+              <h2 className="font-display max-w-xl text-[56px] font-black leading-[1.05] text-[#1C1008]">
+                Kenyamanan yang
+                <br />
+                sudah kami{" "}
+                <span className="italic font-medium text-[#C96A00]">
+                  siapkan
+                </span>
+              </h2>
+            </div>
 
-          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-7 text-[#8B6E52]">
-            Kami menyediakan fasilitas lengkap agar pengalaman tinggal menjadi
-            lebih nyaman, aman, dan menyenangkan.
-          </p>
+            <div className="max-w-sm border-l-2 border-[#C96A00] pl-6">
+              <p className="text-[15px] leading-8 text-[#7D6550]">
+                Seluruh fasilitas dirancang agar penghuni dapat bekerja, belajar
+                dan beristirahat dengan nyaman setiap hari.
+              </p>
+            </div>
+          </div>
+
+          <h1 className="pointer-events-none absolute right-0 top-10 font-display text-[160px] font-black uppercase leading-none text-[#F5F0EA]">
+            FACILITIES
+          </h1>
         </div>
 
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-5 gap-6">
           {facilities.map((item) => (
             <div
-              key={item.title}
-              className="rounded-3xl border border-[#E6D8C6] bg-white p-7 transition hover:-translate-y-2 hover:border-[#C96A00] hover:shadow-xl"
+              key={item.no}
+              className="group overflow-hidden rounded-[34px] border border-[#E9DDD0] bg-white shadow-sm transition-all duration-500 hover:-translate-y-4 hover:border-[#C96A00] hover:shadow-[0_25px_60px_rgba(0,0,0,.12)]"
             >
-              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F7E8D5] text-3xl">
-                {item.icon}
+              {/* IMAGE */}
+              <div className="relative h-[270px] overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-110"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white" />
+
+                {/* ICON */}
+                <div className="absolute bottom-[-20px] left-8 z-30 flex h-20 w-20 items-center justify-center rounded-full bg-[#C96A00] text-4xl text-white shadow-2xl">
+                  {item.icon}
+                </div>
               </div>
 
-              <h3 className="mb-2 text-[20px] font-bold text-[#1C1008]">
-                {item.title}
-              </h3>
+              {/* CONTENT */}
+              <div className="relative px-8 pb-8 pt-12">
+                <span className="absolute right-8 top-4 font-display text-[70px] font-black leading-none text-[#EFE6DD] transition group-hover:text-[#E8D5BF]">
+                  {item.no}
+                </span>
 
-              <p className="text-[14px] leading-7 text-[#8B6E52]">
-                {item.desc}
-              </p>
+                <h3 className="mb-4 text-[28px] font-bold text-[#1C1008]">
+                  {item.title}
+                </h3>
+
+                <p className="min-h-[95px] text-[14px] leading-8 text-[#7A6755]">
+                  {item.desc}
+                </p>
+
+                <div className="mt-8 flex items-center gap-3">
+                  <div className="h-[2px] w-10 bg-[#C96A00] transition-all duration-500 group-hover:w-20" />
+
+                  <span className="text-xl text-[#C96A00] transition-transform duration-500 group-hover:translate-x-2">
+                    →
+                  </span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -274,11 +306,6 @@ export default function Home() {
 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-
-                {/* Nomor kamar */}
-                <span className="font-display pointer-events-none absolute bottom-2 left-4 select-none text-[72px] font-black leading-none text-white/20">
-                  {roomNum[room.id] ?? "—"}
-                </span>
 
                 {/* Badge status */}
                 <span
